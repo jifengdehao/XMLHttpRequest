@@ -4,7 +4,7 @@
 		url: string,
 		type: get | post, 
 		param: {usrename:123},
-		datatype: json | xml,
+		datatype: json | xml |jsonp,
 		async : true | false, (默认为true)
 		jsonp: callback,
 		jsonpCallback: 默认为你添加一个函数名，
@@ -37,7 +37,7 @@ function ajax(data) {
 	params = params.join('&');
 
 	//判断是否是jsonp
-	if(data.datatype == 'jsonp'){
+	if(data.datatype === 'jsonp'){
 		var jsonp = data.jsonp || 'callback',
 			jsonpCallback = data.jsonpCallback || 'myjsonp'+ new Date().getTime(),
 			src = data.url+"?"+params+"&"+jsonp+"="+jsonpCallback,
@@ -52,7 +52,7 @@ function ajax(data) {
 	}else{
 
 		//判断请求方法
-		if (type == 'get') {
+		if (type === 'get') {
 			var url = data.url +"?"+params;
 			
 			xhr.open(type, url, data.async);
